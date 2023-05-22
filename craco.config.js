@@ -1,4 +1,5 @@
 const path = require("path");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   style: {
@@ -32,6 +33,19 @@ module.exports = {
     alias: {
       "@emotion/core": toPath("@emotion/react"),
       "emotion-theming": toPath("@emotion/react"),
+    },
+    configure: (webpackConfig) => {
+      const instanceOfPluginIndex = webpackConfig.plugins.findIndex(
+        (plugin) => plugin instanceof ForkTsCheckerWebpackPlugin
+      );
+
+      if (instanceOfPluginIndex > -1) {
+        webpackConfig.plugins[instanceOfPluginIndex].options = {
+          // Update the options
+        };
+      }
+
+      return webpackConfig;
     },
   },
 };
