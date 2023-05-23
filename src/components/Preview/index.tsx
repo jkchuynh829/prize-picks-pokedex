@@ -5,7 +5,7 @@ import pokeball from "../../pokeball.png";
 
 const Container = tw.section`flex-1 bg-red-400 overflow-hidden p-8 rounded-xl`;
 const Name = tw.h2`uppercase text-4xl text-white mb-6`;
-const ImageContainer = tw.div`flex-1 h-full bg-gray-700 rounded-xl flex justify-center items-center`;
+const ImageContainer = tw.div`flex-1 h-auto bg-gray-700 rounded-xl flex justify-center items-center`;
 const Image = styled.img<{ isLoading?: boolean }>`
   ${tw`w-full h-full object-contain`}
   ${({ isLoading }) => (isLoading ? tw`animate-bounce h-56 w-56` : tw``)}
