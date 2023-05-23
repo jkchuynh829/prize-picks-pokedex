@@ -22,8 +22,8 @@ pnpm start
 
 # Not completed
 
-- [] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
-- [] No tests were written due to time contraint
+- [ ] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
+- [ ] No tests were written due to time contraint
 
 # Concurrency considerations
 
