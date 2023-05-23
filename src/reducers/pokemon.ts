@@ -41,7 +41,7 @@ export const fetchSpecies = createAsyncThunk(
   async (pokemon: string, { dispatch }) => {
     try {
       const result = await fetch(`${SPECIES_ENDPOINT}/${pokemon}`);
-      const response: any = await result.json();
+      const response = await result.json();
 
       dispatch(fetchEvolution(response.evolution_chain.url));
 
@@ -81,9 +81,25 @@ const pokemonSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchPokemon.fulfilled, (state, action) => {
+        if (action.payload.name == null) return;
         state.data[action.payload.name] = {
           ...state.data[action.payload.name],
-          ...action.payload,
+          id: action.payload.id,
+          name: action.payload.name,
+          abilities: action.payload.abilities?.map(
+            (ability: any) => ability.ability.name ?? "ability"
+          ),
+          // Stretch goal: UX for list of learnable moves
+          // moves: action.payload.moves,
+          species: action.payload.species,
+          imageUrl:
+            action.payload.sprites["other"]["official-artwork"][
+              "front_default"
+            ],
+          fallbackImageUrl: action.payload.sprites["front_default"],
+          types: action.payload.types?.map(
+            (type: any) => type.type.name ?? "type"
+          ),
         };
         state.loading = false;
         state.error = null;
@@ -97,13 +113,11 @@ const pokemonSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchSpecies.fulfilled, (state, action) => {
+        if (action.payload.name == null) return;
         state.data[action.payload.name] = {
           ...state.data[action.payload.name],
-          ...action.payload,
-          evolution_chain: {
-            ...action.payload.evolution_chain,
-            id: getEvolutionId(action.payload.evolution_chain.url),
-          },
+          evolution_id: getEvolutionId(action.payload.evolution_chain.url),
+          species: action.payload,
         };
         state.loading = false;
         state.error = null;
@@ -117,6 +131,7 @@ const pokemonSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchEvolution.fulfilled, (state, action) => {
+        if (action.payload.id == null) return;
         state.evolutions[action.payload.id] = {
           ...state.data[action.payload.id],
           ...action.payload,
