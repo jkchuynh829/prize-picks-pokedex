@@ -1,6 +1,5 @@
 import React from "react";
 import tw from "twin.macro";
-import styled from "@emotion/styled";
 import useSearch from "../../hooks/useSearch";
 
 const Section = tw.section`flex-1 bg-red-400 overflow-hidden p-8 rounded-xl`;
