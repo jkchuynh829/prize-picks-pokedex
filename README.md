@@ -22,8 +22,9 @@ pnpm start
 
 # Not completed
 
-- [ ] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
-- [ ] No tests were written due to time contraint
+- [ ] Displaying `moves`. I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
+- [ ] Automated testing. I definitely needed more time to include tests!
+- [ ] Typescript definitions. Given more time, I would have defined the types more exhaustively
 
 # Concurrency considerations
 
