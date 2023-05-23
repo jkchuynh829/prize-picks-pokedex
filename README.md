@@ -1,6 +1,6 @@
 ## Deployed on Vercel
 
-View the project here[prize-picks-pokedex.vercel.app].
+View the project here[https://prize-picks-pokedex.vercel.app].
 
 ## Project Set-up
 
@@ -14,16 +14,16 @@ pnpm start
 
 # Completed
 
-[x] Search for any Pokemon using PokeAPI[https://pokeapi.co/docs/v2.]
-[x] List history of searches with links
-[x] Able to see details about abilities, species, images and types upon searching.
-[x] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain
-[x] Minimal styling and UX
+- [x] Search for any Pokemon using PokeAPI[https://pokeapi.co/docs/v2]
+- [x] List history of searches with links
+- [x] Able to see details about abilities, species, images and types upon searching.
+- [x] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain
+- [x] Minimal styling and UX
 
 # Not completed
 
-[] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
-[] No tests were written due to time contraint
+- [] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
+- [] No tests were written due to time contraint
 
 # Concurrency considerations
 
