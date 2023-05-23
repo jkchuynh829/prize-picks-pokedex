@@ -1,31 +1,38 @@
-# Create React App
+## Deployed on Vercel
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+View the project here[prize-picks-pokedex.vercel.app].
 
-## Deploy Your Own
+## Project Set-up
 
-Deploy your own Create React App project with Vercel.
+```
+pnpm install
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
+pnpm start
+```
 
-_Live Example: https://create-react-template.vercel.app/_
+## Notes
 
-## Available Scripts
+# Completed
 
-In the project directory, you can run:
+[x] Search for any Pokemon using PokeAPI[https://pokeapi.co/docs/v2.]
+[x] List history of searches with links
+[x] Able to see details about abilities, species, images and types upon searching.
+[x] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain
+[x] Minimal styling and UX
 
-### `npm start`
+# Not completed
 
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[] I chose not to include listing each pokemon's `moves` since the list of learnable moves are quite large
+[] No tests were written due to time contraint
 
-The page will reload when you make changes. You may also see any lint errors in the console.
+# Concurrency considerations
 
-### `npm test`
+With respect to the frontend application, we should focus on minimizing API requests to maintain a good level of performance when there are multiple concurrent users making requests.
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I implemented the search feature with a debounced change handler to limit the number of requests made to the API.
 
-### `npm run build`
+When scaling an application like this one, there are a few additional strategies that should be considered. It's critical to implement loading states (placeholders and spinners) and error handling. Having them in place is important to handle slow API responses and to catch any issues that come up during concurrent requests.
 
-Builds the app for production to the `build` folder.
+In additiopn to that, implementing a cacheing solution can be really helpful as well. For this project, we could use localStorage to store the results of API requests so that subsequent requests for the same Pokemon does not require making a call to the PokeAPI. Alternatively, we could leverage libraries like `swr`, a data fetching library with built-in cacheing features.
 
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+Keep in mind the server handling the API requests is more critical to manage concurrency. If we were to advise PokeAPI on concurrency, we would probably be discussing loading balancing strategies, server side caching, CDNs, rate limiting, and more.
