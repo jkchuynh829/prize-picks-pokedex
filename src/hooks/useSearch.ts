@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchPokemon, fetchSpecies } from "../reducers/pokemon";
 import { useDispatch, useSelector } from "../store";
 import { useDebouncedCallback } from "use-debounce";
-import useLocalStorage from "./useLocalstorage";
+import useLocalStorage from "./useLocalStorage";
 
 interface UseSearchValues {
   searchInputValue: string;

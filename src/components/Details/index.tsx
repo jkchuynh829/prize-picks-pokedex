@@ -26,7 +26,6 @@ const Details: React.FC<DetailsProps> = ({
   evolutionChain,
 }) => {
   const { recentSearches } = useSearch();
-  console.log("recentSearches", recentSearches);
   return (
     <Interface>
       <Search
