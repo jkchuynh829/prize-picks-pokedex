@@ -4,14 +4,11 @@ import styled from "@emotion/styled";
 import useSearch from "../../hooks/useSearch";
 
 const Container = tw.div`flex items-center justify-center h-screen w-full bg-gray-50 overflow-hidden`;
-
 const Section = tw.section`flex-1 bg-red-400 overflow-hidden p-8 rounded-xl`;
-
 const Preview = tw(Section)`flex flex-col items-center justify-center p-6`;
 const Name = tw.h2`uppercase text-4xl text-white mb-6`;
 const ImageContainer = tw.div`flex-1 h-full bg-gray-700 rounded-xl`;
 const Image = tw.img`w-full h-full object-contain`;
-
 const Interface = tw(Section)`flex flex-col relative p-6 gap-6`;
 const Search = tw.input`flex-1 h-6 max-h-6 border outline-none border-none rounded-lg p-6 text-xl bg-gray-700 text-white font-bold uppercase`;
 const Info = tw.div`flex-1 h-6 border rounded-lg p-6 text-lg bg-gray-700 text-white font-bold`;
@@ -30,6 +27,7 @@ const Main: React.FC = () => {
     handleSearchChange,
     currentPokemon,
     currentEvolution,
+    recentSearches,
   } = useSearch();
 
   const evolutionChain = useMemo(() => {
@@ -108,12 +106,12 @@ const Main: React.FC = () => {
             </AttributeContainer>
             <AttributeContainer>
               Recent searches:{" "}
-              {evolutionChain?.map((species) => (
+              {recentSearches?.map((pokemon) => (
                 <Button
-                  key={species.name}
-                  onClick={() => handleSearchChange(species.name)}
+                  key={pokemon}
+                  onClick={() => handleSearchChange(pokemon)}
                 >
-                  {species.name}
+                  {pokemon}
                 </Button>
               ))}
             </AttributeContainer>

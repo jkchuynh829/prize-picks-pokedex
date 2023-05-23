@@ -2,12 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { fetchPokemon, fetchSpecies } from "../reducers/pokemon";
 import { useDispatch, useSelector } from "../store";
 import { useDebouncedCallback } from "use-debounce";
+import useLocalStorage from "./useLocalstorage";
 
 interface UseSearchValues {
   searchInputValue: string;
   handleSearchChange: (value: string) => void;
   currentPokemon: Pokemon;
   currentEvolution: any;
+  recentSearches: string[];
 }
 
 const useSearch = (): UseSearchValues => {
@@ -24,6 +26,17 @@ const useSearch = (): UseSearchValues => {
     if (currentPokemon?.evolution_id == null) return null;
     return store.pokemon.evolutions[currentPokemon.evolution_id];
   });
+
+  const [recentSearches, updateRecentSearches] = useLocalStorage<string[]>(
+    "recentSearches",
+    []
+  );
+
+  useEffect(() => {
+    if (currentPokemon?.name == null || !currentPokemon?.name) return;
+    if (recentSearches[0] === currentPokemon.name) return;
+    updateRecentSearches([currentPokemon.name, ...recentSearches.slice(0, 9)]);
+  }, [currentPokemon, recentSearches, updateRecentSearches]);
 
   useEffect(() => {
     if (currentSearch == null || !currentSearch) return;
@@ -48,6 +61,7 @@ const useSearch = (): UseSearchValues => {
     handleSearchChange,
     currentPokemon,
     currentEvolution,
+    recentSearches,
   };
 };
 
