@@ -48,12 +48,6 @@ const useSearch = (): UseSearchValues => {
   }, [currentPokemon, recentSearches, updateRecentSearches]);
 
   useEffect(() => {
-    if (currentSearch) {
-      console.log(
-        "pokemonExistsInState(currentSearch)",
-        pokemonExistsInState(currentSearch)
-      );
-    }
     if (
       currentSearch == null ||
       !currentSearch ||
