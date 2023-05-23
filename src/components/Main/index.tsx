@@ -54,6 +54,7 @@ const Main: React.FC = () => {
         });
       }
 
+      // Does not work for complex evolution chains
       currentSpecies = currentSpecies.evolves_to[0];
     }
 
@@ -96,6 +97,17 @@ const Main: React.FC = () => {
             </AttributeContainer>
             <AttributeContainer>
               Evolutions:{" "}
+              {evolutionChain?.map((species) => (
+                <Button
+                  key={species.name}
+                  onClick={() => handleSearchChange(species.name)}
+                >
+                  {species.name}
+                </Button>
+              ))}
+            </AttributeContainer>
+            <AttributeContainer>
+              Recent searches:{" "}
               {evolutionChain?.map((species) => (
                 <Button
                   key={species.name}
