@@ -18,6 +18,7 @@ const Main: React.FC = () => {
     handleSearchChange,
     currentPokemon,
     currentEvolution,
+    isLoading,
   } = useSearch();
 
   const evolutionChain = useMemo(() => {
@@ -42,7 +43,6 @@ const Main: React.FC = () => {
         });
       }
 
-      // Does not work for complex evolution chains
       currentSpecies = currentSpecies.evolves_to[0];
     }
 
@@ -53,6 +53,7 @@ const Main: React.FC = () => {
     <Container>
       <Pokedex>
         <Preview
+          isLoading={isLoading}
           name={currentPokemon?.name}
           images={{
             url: currentPokemon?.imageUrl,

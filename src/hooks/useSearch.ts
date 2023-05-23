@@ -10,6 +10,7 @@ interface UseSearchValues {
   currentPokemon: Pokemon;
   currentEvolution: any;
   recentSearches: string[];
+  isLoading: boolean;
 }
 
 const useSearch = (): UseSearchValues => {
@@ -23,6 +24,8 @@ const useSearch = (): UseSearchValues => {
   );
 
   const allPokemon = useSelector((store) => store.pokemon.data);
+
+  const isLoading = useSelector((store) => store.pokemon.loading);
 
   const pokemonExistsInState = useCallback(
     (pokemon: string) => {
@@ -76,6 +79,7 @@ const useSearch = (): UseSearchValues => {
     currentPokemon,
     currentEvolution,
     recentSearches,
+    isLoading,
   };
 };
 
