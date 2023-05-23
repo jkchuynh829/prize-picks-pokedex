@@ -22,6 +22,15 @@ const useSearch = (): UseSearchValues => {
     (store) => store.pokemon.data[currentSearch ?? ""]
   );
 
+  const allPokemon = useSelector((store) => store.pokemon.data);
+
+  const pokemonExistsInState = useCallback(
+    (pokemon: string) => {
+      return !!allPokemon[pokemon];
+    },
+    [allPokemon]
+  );
+
   const currentEvolution = useSelector((store) => {
     if (currentPokemon?.evolution_id == null) return null;
     return store.pokemon.evolutions[currentPokemon.evolution_id];
@@ -39,10 +48,21 @@ const useSearch = (): UseSearchValues => {
   }, [currentPokemon, recentSearches, updateRecentSearches]);
 
   useEffect(() => {
-    if (currentSearch == null || !currentSearch) return;
+    if (currentSearch) {
+      console.log(
+        "pokemonExistsInState(currentSearch)",
+        pokemonExistsInState(currentSearch)
+      );
+    }
+    if (
+      currentSearch == null ||
+      !currentSearch ||
+      pokemonExistsInState(currentSearch)
+    )
+      return;
     dispatch(fetchPokemon(currentSearch));
     dispatch(fetchSpecies(currentSearch));
-  }, [dispatch, currentSearch]);
+  }, [dispatch, currentSearch, currentPokemon, pokemonExistsInState]);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setCurrentSearch(value);
