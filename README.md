@@ -26,6 +26,8 @@ pnpm start
 - [ ] Automated testing. I definitely needed more time to include tests!
 - [ ] Typescript definitions. Given more time, I would have defined the types more exhaustively
 
+# Other Notes
+
 # Concurrency considerations
 
 With respect to the frontend application, we should focus on minimizing API requests to maintain a good level of performance when there are multiple concurrent users making requests.
